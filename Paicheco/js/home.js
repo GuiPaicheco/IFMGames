@@ -13,27 +13,27 @@ document.querySelectorAll(".menu-btn").forEach(btn => {
 document.getElementById("new-game").addEventListener("click", () => {
   clickSound.play();
   setTimeout(() => {
-    window.location.href = "pages/main.html";
+    window.location.href = "../pages/main.html";
   }, 300);
 });
 
 document.getElementById("load-game").addEventListener("click", () => {
   clickSound.play();
   setTimeout(() => {
-    window.location.href = "main.html";
+    window.location.href = "../pages/main.html";
   }, 300);
 });
 
 document.getElementById("characters").addEventListener("click", () => {
   clickSound.play();
   setTimeout(() => {
-    window.location.href = "pages/characters.html";
+    window.location.href = "../pages/characters.html";
   }, 300);
 });
 
 document.getElementById("about").addEventListener("click", () => {
   clickSound.play();
   setTimeout(() => {
-    window.location.href = "aboutgame.html";
+    window.location.href = "../aboutgame.html";
   }, 300);
 });
