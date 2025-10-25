@@ -1,0 +1,633 @@
+/* === Corpo principal === */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/images/MainBackGround.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* === Container principal === */
+#game-container {
+  width: 90%;
+  max-width: 950px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+/* === Caixa padrão === */
+.overlay-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #aaa;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  width: 100%;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  animation: float-fade 1.5s ease;
+}
+
+/* === Caixa de diálogo === */
+#dialog-box {
+  font-size: 1.1rem;
+  text-align: left;
+  line-height: 1.4em;
+  flex-shrink: 0;
+  animation: neon-pulse 3s infinite alternate;
+}
+
+/* typewriter effect */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.dialog-text {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  animation: typewriter 1.5s steps(40, end);
+}
+
+
+/* === Inventário === */
+#inventory-box {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  justify-items: center;
+}
+
+.inventory-item {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.inventory-item:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+.inventory-item img {
+  width: 40px;
+}
+
+/* === Caixa de ações === */
+#choices-box {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+  justify-content: center;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+.choice {
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding: 16px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 3s infinite ease-in-out;
+}
+.choice:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+}
+.choice img {
+  width: 40px;
+  margin-bottom: 8px;
+}
+
+/* === Status === */
+#status-box {
+  text-align: center;
+  font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 0;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* === Ícone de configurações === */
+#settings-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.3s;
+}
+#settings-icon:hover {
+  transform: rotate(20deg);
+}
+
+/* === Ícone do mapa === */
+#map-icon {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+#map-icon:hover {
+  transform: scale(1.15) rotate(-10deg);
+  opacity: 1;
+}
+
+/* === Caixa do mapa === */
+#map-box {
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  width: 250px;
+  z-index: 99;
+  font-size: 0.9rem;
+  animation: fade-slide-up 0.6s ease;
+}
+#map-box h3 {
+  margin-top: 0;
+  text-align: center;
+}
+.map-desc {
+  margin-top: 10px;
+  font-style: italic;
+  text-align: center;
+}
+
+/* === Menu de configurações === */
+#settings-box {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 180px;
+  z-index: 99;
+  font-size: 0.9rem;
+}
+.settings-option {
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.settings-option:hover {
+  color: #00d4ff;
+}
+
+/* === Ocultar === */
+.hidden {
+  display: none;
+}
+
+/* === Animações === */
+@keyframes float-fade {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
+  50% { box-shadow: 0 0 15px rgba(255,255,255,0.3); }
+}
+
+/* === Efeitos de feedback (salvar / resetar) === */
+.feedback {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  padding: 20px 30px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #00e0ff;
+  font-size: 1.5rem;
+  border-radius: 15px;
+  border: 2px solid #00e0ff;
+  box-shadow: 0 0 20px #00e0ff;
+  opacity: 0;
+  z-index: 999;
+  animation: feedback-pop 1.5s ease forwards;
+}
+
+@keyframes feedback-pop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  50% { transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+}
+
+/* Efeito de fade de tela para reset */
+#screen-fade {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0;
+  z-index: 998;
+  transition: opacity 1.2s ease;
+}
+#screen-fade.active {
+  opacity: 1;
+}
+
+#background-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; /* não interfere com cliques */
+}
+
+.overlay-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #00d4ff, #ff00ff) 1;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  backdrop-filter: blur(6px);
+  width: 100%;
+  transition: all 0.3s ease;
+  animation: float-fade 1.5s ease;
+}
+
+/* efeito de glow pulsante */
+@keyframes neon-pulse {
+  0%,100% { box-shadow: 0 0 10px rgba(0,212,255,0.4); }
+  50% { box-shadow: 0 0 25px rgba(255,0,255,0.6); }
+}
+#dialog-box, #inventory-box, #status-box {
+  animation: neon-pulse 3s infinite alternate;
+}
+
+.choice {
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 16px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: float-choice 2s infinite ease-in-out;
+}
+.choice img {
+  width: 40px;
+  margin-bottom: 8px;
+  transition: transform 0.3s, filter 0.3s;
+}
+.choice:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px #00d4ff) drop-shadow(0 0 8px #ff00ff49);
+}
+@keyframes float-choice {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
+}
+
+/* === Sliders de volume e música === */
+input[type=range] {
+  -webkit-appearance: none; /* Chrome, Safari */
+  appearance: none;         /* padrão para outros navegadores */
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #00d4ff, #ff00ff);
+  outline: none;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+/* Thumb para Chrome, Safari e Edge */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #00d4ff;
+  border: 2px solid #ff00ff;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: #ff00ff;
+}
+
+/* Thumb para Firefox */
+input[type=range]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #00d4ff;
+  border: 2px solid #ff00ff;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+input[type=range]::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  background: #ff00ff;
+}
+
+/* Track do Firefox */
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #00d4ff, #ff00ff);
+}
+
+/* Track do IE */
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: linear-gradient(90deg, #00d4ff, #ff00ff);
+  border-radius: 3px;
+}
+input[type=range]::-ms-fill-upper {
+  background: linear-gradient(90deg, #00d4ff, #ff00ff);
+  border-radius: 3px;
+}
+input[type=range]::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #00d4ff;
+  border: 2px solid #ff00ff;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+input[type=range]::-ms-thumb:hover {
+  transform: scale(1.2);
+  background: #ff00ff;
+}
+
+/* Ícone de volume (topo direito) */
+#volume-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.3s;
+}
+#volume-icon:hover {
+  transform: rotate(20deg);
+}
+
+/* Ícone salvar/reset (canto inferior direito) */
+#state-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.3s;
+}
+#state-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Caixa de estado */
+#state-box {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 180px;
+  z-index: 99;
+  font-size: 0.9rem;
+}
+
+.settings-slider {
+  cursor: default; /* não muda o cursor */
+  color: white; /* mantém a cor do texto */
+}
+
+.settings-slider input[type=range] {
+  cursor: pointer; /* o slider ainda pode ser arrastado */
+}
+
+/* === Walkie-Talkie === */
+#walkie-icon {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.3s, opacity 0.3s;
+}
+#walkie-icon:hover {
+  transform: scale(1.15) rotate(-10deg);
+  opacity: 1;
+}
+
+/* Caixa do Walkie-Talkie */
+#walkie-box {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  width: 280px;
+  display: none;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #00d4ff, #ff00ff) 1;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 99;
+  overflow: hidden;
+  animation: fade-slide-up 0.6s ease;
+}
+
+#walkie-header {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #00d4ff;
+  font-size: 1rem;
+  color: #00d4ff;
+}
+
+#walkie-chat {
+  height: 160px;
+  overflow-y: auto;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.walkie-msg {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 10px;
+  border-radius: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.3;
+}
+.walkie-msg.you {
+  align-self: flex-end;
+  background: rgba(0, 212, 255, 0.2);
+}
+.walkie-msg.other {
+  align-self: flex-start;
+  background: rgba(255, 0, 255, 0.2);
+}
+
+#walkie-input-area {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#walkie-input {
+  flex-grow: 1;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  outline: none;
+}
+#walkie-send {
+  background: linear-gradient(45deg, #00d4ff, #ff00ff);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+#walkie-send:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px #00d4ff;
+}
+#walkie-send:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+/* Overlay de Pausa */
+#pause-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* escurece o fundo suavemente */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(5px);
+}
+
+#pause-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Texto pausado refinado e centralizado */
+#pause-text {
+  font-size: 3rem;
+  color: #00d4ff;
+  text-shadow: 0 0 2px #00d4ff;
+  font-weight: bold;
+  margin-bottom: 30px;
+  animation: neon-pulse-soft 2s infinite alternate;
+}
+
+@keyframes neon-pulse-soft {
+  0% { text-shadow: 0 0 1px #00d4ff; }
+  50% { text-shadow: 0 0 3px #00d4ff; }
+  100% { text-shadow: 0 0 1px #00d4ff; }
+}
+
+/* Botão Retomar */
+#resume-btn {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #00d4ff, #0055aa);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+#resume-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 6px #00d4ff;
+}

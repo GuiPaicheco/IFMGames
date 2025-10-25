@@ -1,0 +1,78 @@
+/* === Corpo === */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/images/MainBackGround.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* === Container === */
+#menu-container {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #00d4ff, #ff00ff) 1;
+  border-radius: 20px;
+  padding: 40px 60px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+  animation: fade-in 1.5s ease;
+}
+
+/* === Título === */
+.game-title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 0 0 15px #00d4ff, 0 0 30px #ff00ff;
+  animation: glow 3s infinite alternate;
+}
+
+/* === Botões === */
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #00d4ff;
+  color: white;
+  font-size: 1.1rem;
+  padding: 14px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+.menu-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #00d4ff, 0 0 30px #ff00ff;
+}
+
+/* === Rodapé === */
+.footer {
+  margin-top: 40px;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* === Animações === */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+  0%,100% { text-shadow: 0 0 10px #00d4ff; }
+  50% { text-shadow: 0 0 25px #ff00ff; }
+}
